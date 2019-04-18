@@ -1,0 +1,44 @@
+<h4 class="display-4">Détails client</h4>
+<hr>
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+    <input type="hidden" name="client_detail_id" #client_detail_id="ngModel" [(ngModel)]="formData.client_detail_id">
+    <input type="hidden" name="client_id" #client_id="ngModel" [(ngModel)]="formData.client_id">
+  <input type="hidden" name="final_client_nom" #final_client_nom="ngModel" [(ngModel)]="formData.final_client_nom">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label >Est-ce que le client est médiateur?
+    </label>
+       <select name="client_mediator" #client_mediator="ngModel" [(ngModel)]="formData.client_mediator" class="form-control" (change)="updateFinalClient($event.target)">
+        <option value="false" >Non</option>
+        <option value="true" >Oui</option>
+        
+       
+       </select>
+  </div>
+ 
+ 
+  
+    <div class="form-group col-md-6">
+      <label >Le nom de client final</label>
+
+
+
+      <select name="final_client_id" #final_client_id="ngModel" [(ngModel)]="formData.final_client_id" class="form-control" (change)="updateName($event.target)" >
+          <option value="null">pas de client final</option> 
+          <option *ngFor="let c of finalClientService.list" value="{{c.final_client_id}}">{{c.final_client_nom}}</option>
+         </select>
+     
+    </div>
+  </div>
+ <div class="form-group">
+   <label>Autre adresse pour le client{{data.client_nom}} </label>
+   <input name="client_adresse" #client_adresse="ngModel" [(ngModel)]="formData.client_adresse" class="form-control">
+ </div>
+    
+      <div class="form-group">
+          <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Enregistrer</button>
+          <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close] ><i class="fa fa-close"></i> Fermer</button>
+      </div>
+ 
+</form>

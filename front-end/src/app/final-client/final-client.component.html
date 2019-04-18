@@ -1,0 +1,106 @@
+
+<h4 class="display-5 text-center">Ajouter Client Final</h4> <hr>
+<form #form="ngForm" autocomplete="off"  (submit)="onSubmit(form)">
+  <input type="hidden"  name="final_client_id" #final_client_id="ngModel" [(ngModel)]="service.formData.final_client_id">
+  <div class="row">
+    <div class="col-md-6" >
+      <div class="form-group " >
+        <label [class.text-danger]="final_client_nom.invalid && final_client_nom.touched"[class.text-success]="final_client_nom.valid"  >Nom Client Final
+        </label>
+        <div class="input-group">
+           
+              <input required name="final_client_nom" #final_client_nom="ngModel" [(ngModel)]="service.formData.final_client_nom" class="form-control"  [class.is-valid]="final_client_nom.valid " [class.is-invalid]="final_client_nom.invalid  && final_client_nom.touched" >
+
+        </div>
+        <span class="text-danger" *ngIf="final_client_nom.invalid && final_client_nom.touched">Nom Client Final est obligatoire</span>
+      
+      </div>
+
+      <div class="form-group">
+
+        <label [class.text-danger]="final_client_adresse.invalid && final_client_adresse.touched"[class.text-success]="final_client_adresse.valid" >Adresse
+        </label >
+        
+        <input required name="final_client_adresse" #final_client_adresse="ngModel" [(ngModel)]="service.formData.final_client_adresse" class="form-control " class="form-control"[class.is-valid]="final_client_adresse.valid " [class.is-invalid]="final_client_adresse.invalid  && final_client_adresse.touched">
+        <span class="text-danger" *ngIf="final_client_adresse.invalid && final_client_adresse.touched">Adresse est obligatoire</span>
+      </div>
+    
+    
+   
+    
+    </div>
+
+    <div class="col-md-6">
+
+      <!--☺☻♥♦♣♠•-->
+      <div class="form-group">
+        <label [class.text-danger]="final_client_email.invalid && final_client_email.touched"[class.text-success]="final_client_email.valid" >Email
+        </label>
+        <input required [email]="service.formData.final_client_email!==''" name="final_client_email" #final_client_email="ngModel" [(ngModel)]="service.formData.final_client_email" class="form-control"[class.is-valid]="final_client_email.valid " [class.is-invalid]="final_client_email.invalid  && final_client_email.touched">
+      
+      <span class="text-danger" *ngIf="final_client_email.errors?.required && final_client_email.touched">Email est obligatoire</span>
+      <span class="text-danger" *ngIf="final_client_email.errors?.email && final_client_email.touched">Email n'est pas valide</span>
+    </div>
+      <div class="form-group">
+        <label [class.text-danger]="final_client_contact.invalid && final_client_contact.touched"[class.text-success]="final_client_contact.valid">Contact
+        </label><!--0689912549
+          +33698912549
+          +33 6 79 91 25 49
+          +33-6-79-91-25-49
+          (555)-555-5555
+          555-555-5555
+          +1-238 6 79 91 25 49
+          +1-555-532-3455
+          +15555323455
+          
+          +7 06 79 91 25 49
+          935 263223 64 949
+          067 9 91 254 9-->
+        <input required pattern="((?:\+|00)[17](?: |\-)?|(?:\+|00)[1-9]\d{0,2}(?: |\-)?|(?:\+|00)1\-\d{3}(?: |\-)?)?(0\d|\([0-9]{3}\)|[1-9]{0,3})(?:((?: |\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\-)[0-9]{3}(?: |\-)[0-9]{4})|([0-9]{7}))" name="final_client_contact" #final_client_contact="ngModel" [(ngModel)]="service.formData.final_client_contact" class="form-control" class="form-control"[class.is-valid]="final_client_contact.valid " [class.is-invalid]="final_client_contact.invalid  && final_client_contact.touched">
+        <span class="text-danger" *ngIf="final_client_contact.errors?.required && final_client_contact.touched">Contact est obligatoire</span>
+        <span class="text-danger" *ngIf="final_client_contact.errors?.pattern && final_client_contact.touched">Contact n'est pas valide</span>
+      </div>
+  
+    
+    </div>
+    
+  </div>
+
+  <!--Table de details de facture -->
+  <!--<table class="table table-borderless" >
+    <thead class="thead-light">
+      <th>Description du Contrat</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>TVA</th>
+      <th>Totale</th>
+      <th>
+        <a  class="btn btn-sm btn-success" (click)="addOrEditFactDetail(null,service.formData.Fact_id)"><i class="fa fa-plus"></i> Ajouter un contrat</a>
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngIf="service.factureDetails.length == 0" [class.text-danger]="!isValid && service.factureDetails.length==0">
+        <td class="font-italic text-center ml-1" colspan="6">
+          Pas de contrat sélectionné dans cette facture.
+        </td>
+      </tr>
+      <tr *ngFor="let c of service.clientDetails; let i=index">
+        <td>{{c.client_mediator}} </td>
+        <td>{{c.Price}} </td>
+        <td>{{c.Quantity}} </td>
+        <td>{{c.TVA}} </td>
+        <td>{{c.Total}} </td>
+        <td>
+            <a  class="btn btn-sm btn-info" (click)="addOrEditFactDetail(i,service.formData.client_id)"><i class="fa fa-pencil"></i></a>
+            <a  class="btn btn-sm btn-danger ml-1" (click)="onDeleteFactDetail(i,service.formData.client_id)"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+-->
+  <div class="form-group">
+    <button type="submit" class="btn btn-dark" [disabled]="form.invalid"><i class="fa fa-database"></i> Enregistrer</button>
+    
+  </div>
+</form>

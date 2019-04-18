@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FacturationBDD_v02Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="client_id" />
+    </Key>
+    <Property Name="client_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="client_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="client_adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="client_siret" Type="Int32" />
+    <Property Name="client_TVA" Type="Int32" />
+    <Property Name="client_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Client_details" Relationship="Self.FK_Client_details_Client" FromRole="Client" ToRole="Client_details" />
+    <NavigationProperty Name="Contrat" Relationship="Self.FK_Contrat_Client" FromRole="Client" ToRole="Contrat" />
+    <NavigationProperty Name="Facture_details" Relationship="Self.FK_Facture_details_Client" FromRole="Client" ToRole="Facture_details" />
+  </EntityType>
+  <EntityType Name="Client_details">
+    <Key>
+      <PropertyRef Name="client_detail_id" />
+    </Key>
+    <Property Name="client_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="client_id" Type="Int32" />
+    <Property Name="client_mediator" Type="Boolean" />
+    <Property Name="final_client_id" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Client_details_Client" FromRole="Client_details" ToRole="Client" />
+    <NavigationProperty Name="Final_client" Relationship="Self.FK_Client_details_Final_client" FromRole="Client_details" ToRole="Final_client" />
+    <Property Name="final_client_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="client_adresse" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Contrat">
+    <Key>
+      <PropertyRef Name="contrat_id" />
+    </Key>
+    <Property Name="contrat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="prix_unitaire" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="final_client_id" Type="Int32" />
+    <Property Name="client_id" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Contrat_Client" FromRole="Contrat" ToRole="Client" />
+    <NavigationProperty Name="Final_client" Relationship="Self.FK_Contrat_Final_client" FromRole="Contrat" ToRole="Final_client" />
+    <NavigationProperty Name="Facture" Relationship="FacturationBDD_v02Model.FK_Facture_Contrat" FromRole="Contrat" ToRole="Facture" />
+    <Property Name="ref_contrat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_debut" Type="DateTime" Precision="0" />
+    <Property Name="date_fin" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Facture">
+    <Key>
+      <PropertyRef Name="fact_id" />
+    </Key>
+    <Property Name="fact_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ref_fact" Type="Int32" />
+    <NavigationProperty Name="Facture_details" Relationship="Self.FK_Facture_details_Facture" FromRole="Facture" ToRole="Facture_details" />
+    <Property Name="mois" Type="DateTime" Precision="0" />
+    <Property Name="client" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_envoie" Type="DateTime" Precision="0" />
+    <Property Name="contrat_id" Type="Int32" />
+    <NavigationProperty Name="Contrat" Relationship="FacturationBDD_v02Model.FK_Facture_Contrat" FromRole="Facture" ToRole="Contrat" />
+  </EntityType>
+  <EntityType Name="Facture_details">
+    <Key>
+      <PropertyRef Name="fact_detail_id" />
+    </Key>
+    <Property Name="fact_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="num_fact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fact_id" Type="Int32" />
+    <Property Name="client_id" Type="Int32" />
+    <Property Name="quantite" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="date_envoie" Precision="0" Type="DateTime" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Facture_details_Client" FromRole="Facture_details" ToRole="Client" />
+    <NavigationProperty Name="Facture" Relationship="Self.FK_Facture_details_Facture" FromRole="Facture_details" ToRole="Facture" />
+    <Property Name="prix_unitaire" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="mois" Type="DateTime" Precision="0" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tva" Type="Int32" />
+    <Property Name="total_ht" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="total_ttc" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Final_client">
+    <Key>
+      <PropertyRef Name="final_client_id" />
+    </Key>
+    <Property Name="final_client_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="final_client_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="final_client_adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="final_client_contact" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="final_client_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Client_details" Relationship="Self.FK_Client_details_Final_client" FromRole="Final_client" ToRole="Client_details" />
+    <NavigationProperty Name="Contrat" Relationship="Self.FK_Contrat_Final_client" FromRole="Final_client" ToRole="Contrat" />
+  </EntityType>
+  <Association Name="FK_Client_details_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Client_details" Type="Self.Client_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="client_id" />
+      </Principal>
+      <Dependent Role="Client_details">
+        <PropertyRef Name="client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contrat_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Contrat" Type="Self.Contrat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="client_id" />
+      </Principal>
+      <Dependent Role="Contrat">
+        <PropertyRef Name="client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facture_details_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Facture_details" Type="Self.Facture_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="client_id" />
+      </Principal>
+      <Dependent Role="Facture_details">
+        <PropertyRef Name="client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_details_Final_client">
+    <End Role="Final_client" Type="Self.Final_client" Multiplicity="0..1" />
+    <End Role="Client_details" Type="Self.Client_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Final_client">
+        <PropertyRef Name="final_client_id" />
+      </Principal>
+      <Dependent Role="Client_details">
+        <PropertyRef Name="final_client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contrat_Final_client">
+    <End Role="Final_client" Type="Self.Final_client" Multiplicity="0..1" />
+    <End Role="Contrat" Type="Self.Contrat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Final_client">
+        <PropertyRef Name="final_client_id" />
+      </Principal>
+      <Dependent Role="Contrat">
+        <PropertyRef Name="final_client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facture_details_Facture">
+    <End Role="Facture" Type="Self.Facture" Multiplicity="1" />
+    <End Role="Facture_details" Type="Self.Facture_details" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Facture">
+        <PropertyRef Name="fact_id" />
+      </Principal>
+      <Dependent Role="Facture_details">
+        <PropertyRef Name="fact_detail_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FacturationBDD_v02Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Client_details" EntityType="Self.Client_details" />
+    <EntitySet Name="Contrat" EntityType="Self.Contrat" />
+    <EntitySet Name="Facture" EntityType="Self.Facture" />
+    <EntitySet Name="Facture_details" EntityType="Self.Facture_details" />
+    <EntitySet Name="Final_client" EntityType="Self.Final_client" />
+    <AssociationSet Name="FK_Client_details_Client" Association="Self.FK_Client_details_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Client_details" EntitySet="Client_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contrat_Client" Association="Self.FK_Contrat_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Contrat" EntitySet="Contrat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facture_details_Client" Association="Self.FK_Facture_details_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Facture_details" EntitySet="Facture_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_details_Final_client" Association="Self.FK_Client_details_Final_client">
+      <End Role="Final_client" EntitySet="Final_client" />
+      <End Role="Client_details" EntitySet="Client_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contrat_Final_client" Association="Self.FK_Contrat_Final_client">
+      <End Role="Final_client" EntitySet="Final_client" />
+      <End Role="Contrat" EntitySet="Contrat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facture_details_Facture" Association="Self.FK_Facture_details_Facture">
+      <End Role="Facture" EntitySet="Facture" />
+      <End Role="Facture_details" EntitySet="Facture_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facture_Contrat" Association="FacturationBDD_v02Model.FK_Facture_Contrat">
+      <End Role="Contrat" EntitySet="Contrat" />
+      <End Role="Facture" EntitySet="Facture" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Facture_Contrat">
+    <End Type="FacturationBDD_v02Model.Contrat" Role="Contrat" Multiplicity="0..1" />
+    <End Type="FacturationBDD_v02Model.Facture" Role="Facture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contrat">
+        <PropertyRef Name="contrat_id" />
+      </Principal>
+      <Dependent Role="Facture">
+        <PropertyRef Name="contrat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

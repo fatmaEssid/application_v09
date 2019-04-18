@@ -1,0 +1,28 @@
+
+<h4 class="display-5 text-center">Liste des factures</h4><hr>
+<table class="table table-hover">
+  <thead class="thead-light">
+    <th>Numéro Facture</th>
+    <th>Client</th>
+    <th>Adresse</th>
+    <th>Email</th>
+    <th>Date d'envoie</th>
+    <th>Methode de paiement</th>
+    <th>Montant à payée</th>
+    <th>
+      <a  class="btn btn-outline-success" routerLink="/facture"><i class="fa fa-plus-square"></i> Ajouter</a>
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of factureList">
+      <th (click)="openOrEdit(i.Fact_id)">{{i.Fact_num}} </th>
+      <td>{{i.Client}} </td>
+      <td>{{i.Client_adresse}} </td>
+      <td>{{i.Client_email}} </td>
+      <td>{{i.Date_envoie}} </td>
+      <td>{{i.PMethod}} </td>
+      <td>{{i.GTotal}} €</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

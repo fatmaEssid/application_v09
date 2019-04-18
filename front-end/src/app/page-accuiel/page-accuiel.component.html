@@ -1,0 +1,50 @@
+<h5 class="display-5 " >Page d'Accueil</h5>
+<hr>
+<mat-tab-group >
+  <mat-tab >
+    <ng-template mat-tab-label >
+      <mat-icon class="example-tab-icon">date_range</mat-icon>
+      Liste des facture
+    </ng-template>
+    <br>
+    
+   <ul type="none">
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-calendar"></i> 01/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 02/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 03/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 04/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 05/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 06/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 07/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 08/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 09/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 10/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 11/19</a></li> 
+              <li> <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> 12/19</a></li> 
+              
+            </ul>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">perm_contact_calendar</mat-icon>
+      Liste des clients
+    </ng-template>
+    <br>
+   
+      <a  class="btn btn-outline-dark ml-1" routerLink="/clients"><i class="fa fa-table"></i>Liste des clients</a>
+   <a  class="btn btn-outline-dark ml-1" routerLink="/final-clients"><i class="fa fa-table"></i> Liste des clients finals</a>
+     
+   
+    
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">assignment</mat-icon>
+      liste des contrats
+    </ng-template>
+
+    <a  class="btn btn-outline-dark ml-1" routerLink="/contrats"><i class="fa fa-table"></i> Liste des contrats</a>
+  </mat-tab>
+</mat-tab-group>

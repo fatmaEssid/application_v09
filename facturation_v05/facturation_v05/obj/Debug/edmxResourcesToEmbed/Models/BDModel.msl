@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FacturationBDD_v02ModelStoreContainer" CdmEntityContainer="FacturationBDD_v02Entities">
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="FacturationBDD_v02Model.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="client_nom" ColumnName="client_nom" />
+          <ScalarProperty Name="client_adresse" ColumnName="client_adresse" />
+          <ScalarProperty Name="client_siret" ColumnName="client_siret" />
+          <ScalarProperty Name="client_TVA" ColumnName="client_TVA" />
+          <ScalarProperty Name="client_email" ColumnName="client_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client_details">
+      <EntityTypeMapping TypeName="FacturationBDD_v02Model.Client_details">
+        <MappingFragment StoreEntitySet="Client_details">
+          <ScalarProperty Name="client_adresse" ColumnName="client_adresse" />
+          <ScalarProperty Name="final_client_nom" ColumnName="final_client_nom" />
+          <ScalarProperty Name="client_detail_id" ColumnName="client_detail_id" />
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="client_mediator" ColumnName="client_mediator" />
+          <ScalarProperty Name="final_client_id" ColumnName="final_client_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contrat">
+      <EntityTypeMapping TypeName="FacturationBDD_v02Model.Contrat">
+        <MappingFragment StoreEntitySet="Contrat">
+          <ScalarProperty Name="date_fin" ColumnName="date_fin" />
+          <ScalarProperty Name="date_debut" ColumnName="date_debut" />
+          <ScalarProperty Name="ref_contrat" ColumnName="ref_contrat" />
+          <ScalarProperty Name="contrat_id" ColumnName="contrat_id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="prix_unitaire" ColumnName="prix_unitaire" />
+          <ScalarProperty Name="final_client_id" ColumnName="final_client_id" />
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facture">
+      <EntityTypeMapping TypeName="FacturationBDD_v02Model.Facture">
+        <MappingFragment StoreEntitySet="Facture">
+          <ScalarProperty Name="contrat_id" ColumnName="contrat-id" />
+          <ScalarProperty Name="date_envoie" ColumnName="date_envoie" />
+          <ScalarProperty Name="client" ColumnName="client" />
+          <ScalarProperty Name="mois" ColumnName="mois" />
+          <ScalarProperty Name="fact_id" ColumnName="fact_id" />
+          <ScalarProperty Name="ref_fact" ColumnName="ref_fact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facture_details">
+      <EntityTypeMapping TypeName="FacturationBDD_v02Model.Facture_details">
+        <MappingFragment StoreEntitySet="Facture_details">
+          <ScalarProperty Name="total_ttc" ColumnName="total_ttc" />
+          <ScalarProperty Name="total_ht" ColumnName="total_ht" />
+          <ScalarProperty Name="tva" ColumnName="tva" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="mois" ColumnName="mois" />
+          <ScalarProperty Name="prix_unitaire" ColumnName="prix_unitaire" />
+          <ScalarProperty Name="fact_detail_id" ColumnName="fact_detail_id" />
+          <ScalarProperty Name="num_fact" ColumnName="num_fact" />
+          <ScalarProperty Name="fact_id" ColumnName="fact_id" />
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="quantite" ColumnName="quantite" />
+          <ScalarProperty Name="date_envoie" ColumnName="date_envoie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Final_client">
+      <EntityTypeMapping TypeName="FacturationBDD_v02Model.Final_client">
+        <MappingFragment StoreEntitySet="Final_client">
+          <ScalarProperty Name="final_client_id" ColumnName="final_client_id" />
+          <ScalarProperty Name="final_client_nom" ColumnName="final_client_nom" />
+          <ScalarProperty Name="final_client_adresse" ColumnName="final_client_adresse" />
+          <ScalarProperty Name="final_client_contact" ColumnName="final_client_contact" />
+          <ScalarProperty Name="final_client_email" ColumnName="final_client_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

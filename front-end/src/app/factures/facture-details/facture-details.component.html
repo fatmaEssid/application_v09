@@ -1,0 +1,77 @@
+<h4 class="display-4">Détails de la facture</h4>
+<hr>
+<form #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="Fact_detail_id" #Fact_detail_id="ngModel" [(ngModel)]="formData.Fact_detail_id">
+    <input type="hidden" name="Fact_id" #Fact_id="ngModel" [(ngModel)]="formData.Fact_id">
+  <input type="hidden" name="Description" #Description="ngModel" [(ngModel)]="formData.Description">
+  <div class="form-group">
+    <label >La déscription de le Contrat</label>
+    <select name="Contrat_id" #Contrat_id="ngModel" [(ngModel)]="formData.Contrat_id" class="form-control" (change)="updatePrice($event.target)" [class.is-invalid]="!isValid && formData.Contrat_id==0">
+        <option value="0">-select-</option> 
+        <option *ngFor="let c of contratList" value="{{c.Contrat_id}}">{{c.Description}}</option>
+       </select>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+      <label >Price
+      </label>
+      <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              €
+            </div>
+        
+            </div>
+            <input name="Price" #Price="ngModel" [(ngModel)]="formData.Price" class="form-control" readonly>
+
+      </div>
+     
+    </div>
+    <div class="form-group col-md-6">
+        <label >Quantity
+        </label>
+              <input name="Quantity" #Quantity="ngModel" [(ngModel)]="formData.Quantity" class="form-control" (keyup)="updateTotal()" [class.is-invalid]="!isValid && formData.Quantity==0">     
+      </div>
+    </div>
+
+
+    <div class="form-row">
+
+        <div class="form-group col-md-2">
+
+    <div class="form-group">
+        <label >TVA
+        </label>
+        <div class="input-group">
+            
+              <input name="TVA" #TVA="ngModel" [(ngModel)]="formData.TVA" class="form-control" readonly>
+  
+        </div>
+       
+      </div>
+
+    </div>
+      <div class="form-group col-md-10">
+    <div class="form-group">
+        <label >Total TTC
+        </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                €
+              </div>
+          
+              </div>
+              <input name="Total" #Total="ngModel" [(ngModel)]="formData.Total" class="form-control" readonly>
+  
+        </div>
+       
+      </div>
+    </div>
+    </div>
+    
+      <div class="form-group">
+          <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Enregistrer</button>
+          <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close] ><i class="fa fa-close"></i> Fermer</button>
+      </div>
+</form>

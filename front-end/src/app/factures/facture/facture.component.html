@@ -1,0 +1,109 @@
+<form #form="ngForm" autocomplete="off" *ngIf="service.formData" (submit)="onSubmit(form)">
+  <div class="row">
+    <div class="col-md-6" >
+      <div class="form-group">
+        <label >Num. facture
+        </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                #
+              </div>
+          
+              </div>
+              <input name="Fact_num" #Fact_num="ngModel" [(ngModel)]="service.formData.Fact_num" class="form-control" readonly>
+
+        </div>
+        
+      </div>
+
+      <div class="form-group">
+        <label >Client
+        </label>
+        <select name="Client_id" #Client_id="ngModel" [(ngModel)]="service.formData.Client_id" class="form-control" [class.is-invalid]="!isValid && service.formData.Client_id==0">
+         <option value="0">-select-</option> 
+         <option *ngFor="let c of clientList" value="{{c.Client_id}} ">{{c.Client_name}} </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label >Méthode de paiement
+        </label>
+           <select name="PMethod" #PMethod="ngModel" [(ngModel)]="service.formData.PMethod" class="form-control">
+            <option value="0">-select-</option> 
+            <option value="cash">Cash</option>
+            <option value="card">Card</option>
+           </select>
+      </div>
+    
+   
+    
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label >Date d'envoie
+        </label>
+        <input name="Date_envoie" #Date_envoie="ngModel" [(ngModel)]="service.formData.Date_envoie" class="form-control">
+      </div>
+      <div class="form-group ">
+        <label >Mois actuelle
+        </label>
+        <input name="Mois" #Mois="ngModel" [(ngModel)]="service.formData.Mois" class="form-control">
+      </div>
+      <div class="form-group">
+        <label >Grand totale
+        </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                €
+              </div>
+          
+              </div>
+              <input name="GTotal" #GTotal="ngModel" [(ngModel)]="service.formData.GTotal" class="form-control" readonly>
+
+        </div>
+       
+      </div>
+    
+    </div>
+  </div>
+
+  <!--Table de details de facture -->
+  <table class="table table-borderless" >
+    <thead class="thead-light">
+      <th>Description du Contrat</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>TVA</th>
+      <th>Totale</th>
+      <th>
+        <a  class="btn btn-sm btn-success" (click)="addOrEditFactDetail(null,service.formData.Fact_id)"><i class="fa fa-plus"></i> Ajouter un contrat</a>
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngIf="service.factureDetails.length == 0" >
+        <td class="font-italic text-center ml-1" colspan="6">
+          Pas de contrat sélectionné dans cette facture.
+        </td>
+      </tr>
+      <tr *ngFor="let c of service.factureDetails; let i=index">
+        <td>{{c.Description}} </td>
+        <td>{{c.Price}} </td>
+        <td>{{c.Quantity}} </td>
+        <td>{{c.TVA}} </td>
+        <td>{{c.Total}} </td>
+        <td>
+            <a  class="btn btn-sm btn-info" (click)="addOrEditFactDetail(i,service.formData.Fact_id)"><i class="fa fa-pencil"></i></a>
+            <a  class="btn btn-sm btn-danger ml-1" (click)="onDeleteFactDetail(i,service.formData.Fact_id)"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Enregistrer</button>
+    <a  class="btn btn-outline-dark ml-1" routerLink="/factures"><i class="fa fa-table"></i> Afficher</a>
+  </div>
+</form>

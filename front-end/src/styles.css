@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.jumbotron{
+    padding-top: 0px;
+background: #fff;
+}
+.form-control, .input-group-text{
+    border: 1px solid #0080ff;
+}
+table.table-hover tbody tr:hover{
+cursor: pointer;
+}
+.fatma{
+
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}

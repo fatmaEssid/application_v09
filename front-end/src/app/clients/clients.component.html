@@ -1,0 +1,35 @@
+
+<h4 class="display-5 text-center">Liste des clients</h4><hr>
+<table class="table table-hover">
+  <thead class="thead-light align-center">
+    <th>Client ID</th>
+    <th>Client </th>
+    <th>Num° Siret</th>
+    <th>Adresse</th>
+    <th>E-mail</th>
+    <th>TVA </th>
+    <th>
+      <a  class="btn btn-outline-success" routerLink="/client"><i class="fa fa-plus-square"></i></a>
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of clientList">
+      <th (click)="openOrEdit(i.client_id)">{{i.client_id}} </th>
+      <td (click)="openOrEdit(i.client_id)">{{i.client_nom}} </td>
+      <td (click)="openOrEdit(i.client_id)">{{i.client_siret}} </td>
+      <td (click)="openOrEdit(i.client_id)">{{i.client_adresse}} </td>
+      <td (click)="openOrEdit(i.client_id)">{{i.client_email}} </td>
+      <td (click)="openOrEdit(i.client_id)">{{i.client_TVA}}%</td>
+      <!-- <td (click)="openOrEdit(i.client_id)" *ngIf="i.final_client_id == null">------</td>
+
+
+        <td (click)="openOrEdit(i.client_id)" *ngIf="i.final_client_id != null">{{i.final_client_nom}}</td>
+-->
+       
+     
+        <td>
+            <a class="btn text-danger" (click)="onDeleteClient(i.client_id)"><i class="fa fa-trash fa-lg"></i></a>
+        </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,143 @@
+<h4 class="display-5 text-center">Ajouter Contrat </h4> 
+
+  
+<hr>
+<form #form="ngForm" autocomplete="off" *ngIf="service.formData" (submit)="onSubmit(form)">
+  <input type="hidden" name="contrat_id" #contrat_id= "ngModel" [(ngModel)]="service.formData.contrat_id">
+  <input type="hidden" name="client_nom" #client_nom= "ngModel" [(ngModel)]="service.formData.client_nom">
+  <input type="hidden" name="final_client_nom" #final_client_nom= "ngModel" [(ngModel)]="service.formData.final_client_nom">
+
+
+    <div class="row">
+      <div class="col-md-6" >
+        <div class="form-group">
+   
+          <label  [class.text-danger]="ref_contrat.invalid && ref_contrat.touched"[class.text-success]="ref_contrat.valid">Réference Contrat
+          </label> 
+          <div class="input-group">
+            
+            <input required  name="ref_contrat" #ref_contrat="ngModel" [(ngModel)]="service.formData.ref_contrat"  class="form-control" [class.is-valid]="ref_contrat.valid " [class.is-invalid]="ref_contrat.invalid  && ref_contrat.touched">
+                    </div>
+                    <span class="text-danger" *ngIf="ref_contrat.invalid && ref_contrat.touched">Réference Contrat est obligatoire</span>
+        </div>
+      
+            <div class="form-group">
+              <label [class.text-danger]="!isValid && service.formData.final_client_id==0 ">Client Final
+              </label>
+              <select [attr.disabled]= "service.formData.client_id ? null:true"  name="final_client_id" #final_client_id="ngModel" [(ngModel)]="service.formData.final_client_id" class="form-control" (change)="nomClientFinal($event.target)"[class.is-invalid]="!isValid && service.formData.final_client_id==0 ">
+                <option value="0" >-Sélectionnez Final Client-</option>
+                <option value="null">Pas Final Client</option> 
+               <option *ngFor="let c of finalClientList" value="{{c.final_client_id }} ">{{c.final_client_nom}} </option>
+              </select>
+             
+            </div>
+            <mat-form-field class="example-full-width"> 
+              <input matInput placeholder="ID Final Client" name="final_client_id" #final_client_id="ngModel" [(ngModel)]="service.formData.final_client_id"readonly>
+            </mat-form-field>
+           
+  
+                
+                    <!--<div class="input-group" >
+                      
+                      <input  [matDatepicker]="date_debut"  name="date_debut" #date_debut="ngModel" [(ngModel)]="service.formData.date_debut" placeholder="mm/jj/aaaa"  class="form-control" >
+                   
+                      <div class="input-group-prepend">
+                        
+                        <mat-datepicker-toggle matSuffix [for]="date_debut"></mat-datepicker-toggle>
+                        <mat-datepicker #date_debut></mat-datepicker>
+                 
+                     
+                  
+                      </div>
+                    </div>-->
+                   <!--<mat-error align= "end"  *ngIf="dateCtrl.hasError('required')">
+                      Date valide jj/mm/aaaa est obligatoire
+                    </mat-error>☺-->
+             
+          <div class="form-group">
+                 
+            
+            <label class="input-group" [class.text-danger]="date_debut.invalid && date_debut.touched"[class.text-success]="date_debut.valid" >Date Début
+            </label> 
+            <div >
+              
+              <input required type="text" bsDatepicker  placement="top"[bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',adaptivePosition:'true' , containerClass: 'theme-red'}" name="date_debut" #date_debut="ngModel" [(ngModel)]="service.formData.date_debut"  class="form-control" [class.is-invalid]="date_debut.invalid  && date_debut.touched" [class.is-valid]="date_debut.valid ">
+           
+              
+            </div>
+            <span class="text-danger" *ngIf="date_debut.invalid && date_debut.touched">Date Début est obligatoire</span></div>     
+        </div>
+          
+        <div class="col-md-6">
+     
+            
+          <div class="form-group">
+            <label >Client
+            </label>
+            <select required name="client_id" #client_id="ngModel" [(ngModel)]="service.formData.client_id" class="form-control" [class.is-invalid]="!isValid && service.formData.client_id==0 " (change)="updateID($event.target)">
+             <option value="0">-Selectionnez Client-</option> 
+             <option *ngFor="let c of clientList" value="{{c.client_id}} ">{{c.client_nom}} </option>
+            </select>
+           
+          </div> <mat-form-field class="example-full-width"> 
+            <input matInput placeholder="Nom Client" name="client_nom" #client_nom="ngModel" [(ngModel)]="service.formData.client_nom" readonly>
+          </mat-form-field>
+    <!---->
+         
+    <div class="form-group">
+        <label  [class.text-danger]="prix_unitaire.invalid  && prix_unitaire.touched" [class.text-success]="prix_unitaire.valid ">Prix Unitaire
+        </label>
+        <div class="input-group">
+           <!--^[0-9]+(\.[0-9]{1,2})?$-->
+           <input  required pattern="^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$" name="prix_unitaire" #prix_unitaire="ngModel" [(ngModel)]="service.formData.prix_unitaire" class="form-control" [class.is-invalid]="prix_unitaire.invalid  && prix_unitaire.touched"  [class.is-valid]="prix_unitaire.valid && service.formData.prix_unitaire!=0 ">
+           <div class="input-group-prepend">
+            <div class="input-group-text">
+              €
+            </div>
+        
+            </div></div>
+            <span class="text-danger" *ngIf="prix_unitaire.errors?.required && prix_unitaire.touched">Prix Unitaire est obligatoire</span>
+            <span class="text-danger" *ngIf="prix_unitaire.errors?.pattern && prix_unitaire.touched">Prix Unitaire n'est pas valide</span>
+        
+          </div>
+
+ 
+            <div class="form-group">
+                 
+            
+              <label  [class.text-danger]="date_fin.invalid  && date_fin.touched" [class.text-success]= "date_fin.valid ">Date Fin
+              </label> 
+              <div class="input-group" >
+                
+                <input required [disabled]= "service.formData.date_debut== null" type="text" bsDatepicker  placement="top"[bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',adaptivePosition:'true' , containerClass: 'theme-red'}" [minDate]="service.formData.date_debut " name="date_fin" #date_fin="ngModel" [(ngModel)]="service.formData.date_fin"  class="form-control" [class.is-invalid]="date_fin.invalid  && date_fin.touched" [class.is-valid]= "date_fin.valid ">
+             
+                
+              </div><div class="text-danger" *ngIf="service.formData.date_debut >= service.formData.date_fin &&service.formData.date_debut != null &&service.formData.date_fin != null">date invalide</div>
+              </div> 
+            </div>
+      <!---->
+      
+      </div>
+       <!---->
+
+       
+   
+  
+  
+    <div class="form-group">
+      <label [class.text-danger]="description.invalid && description.touched"[class.text-success]="description.valid">Description du contrat
+      </label>          
+            
+            <input required name="description" #description="ngModel" [(ngModel)]="service.formData.description" class="form-control" [class.is-valid]="description.valid " [class.is-invalid]="description.invalid  && description.touched">
+            <span class="text-danger" *ngIf="description.invalid && description.touched">Description du contrat est obligatoire</span>
+           </div>  
+  
+         
+        
+    <div class="form-group">
+      <button type="submit" class="btn btn-dark" [disabled]="form.invalid" ><i class="fa fa-database"></i> Enregistrer</button>
+     
+    </div>
+
+  </form>
+ 
